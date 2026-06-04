@@ -15,65 +15,72 @@ const settingsStore = useSettingsStore()
   >
     <div class="container mx-auto px-8 py-4 flex flex-wrap justify-between items-center gap-4">
 
+      <!-- LOGO -->
       <router-link
         to="/"
-        class="text-3xl font-extrabold tracking-wider"
+        class="text-3xl font-extrabold tracking-wider hover:opacity-90 transition"
       >
         CareBridge
       </router-link>
 
-      <div class="flex flex-wrap items-center gap-5">
-        <router-link to="/" class="uppercase font-bold tracking-widest relative group">
+      <!-- LINKS -->
+      <div class="flex flex-wrap items-center gap-6 text-sm md:text-base">
+
+        <router-link to="/" class="uppercase font-bold tracking-widest hover:opacity-80 transition">
           {{ settingsStore?.labels?.home || 'Home' }}
-          <span class="absolute left-0 -bottom-1 h-[2px] w-0 bg-white transition-all duration-300 group-hover:w-full"></span>
         </router-link>
 
-        <router-link to="/about" class="uppercase font-bold tracking-widest relative group">
+        <router-link to="/about" class="uppercase font-bold tracking-widest hover:opacity-80 transition">
           {{ settingsStore?.labels?.about || 'About' }}
         </router-link>
 
-        <router-link to="/services" class="uppercase font-bold tracking-widest relative group">
+        <router-link to="/services" class="uppercase font-bold tracking-widest hover:opacity-80 transition">
           {{ settingsStore?.labels?.services || 'Services' }}
         </router-link>
 
-        <router-link to="/contact" class="uppercase font-bold tracking-widest relative group">
+        <router-link to="/contact" class="uppercase font-bold tracking-widest hover:opacity-80 transition">
           {{ settingsStore?.labels?.contact || 'Contact' }}
         </router-link>
 
         <router-link
           to="/login"
-          class="uppercase font-bold tracking-widest border border-white px-5 py-2 rounded-xl transition hover:scale-105"
+          class="uppercase font-bold tracking-widest border border-white px-4 py-2 rounded-xl hover:scale-105 transition"
         >
           {{ settingsStore?.labels?.login || 'Login' }}
         </router-link>
       </div>
 
+      <!-- CONTROLS -->
       <div class="flex items-center gap-3">
+
+        <!-- LANGUAGE -->
         <select
           v-model="settingsStore.language"
           @change="settingsStore.setLanguage(settingsStore.language)"
-          class="rounded-2xl border border-white/30 bg-white/10 px-4 py-2 text-sm font-semibold text-white outline-none backdrop-blur transition duration-300"
+          class="rounded-xl border border-white/30 bg-white/10 px-3 py-2 text-sm font-semibold text-white backdrop-blur outline-none"
         >
           <option
-            v-for="option in (settingsStore?.languages || ['EN'])"
-            :key="option"
-            :value="option"
+            v-for="lang in (settingsStore?.languages || ['EN'])"
+            :key="lang"
+            :value="lang"
           >
-            {{ option }}
+            {{ lang }}
           </option>
         </select>
 
+        <!-- THEME TOGGLE -->
         <button
           @click="settingsStore.toggleTheme()"
-          class="rounded-full border border-white/30 bg-white/10 px-4 py-2 text-sm font-semibold text-white transition hover:bg-white/20"
+          class="rounded-full border border-white/30 bg-white/10 px-4 py-2 text-sm font-semibold text-white hover:bg-white/20 transition"
         >
-          <span v-if="settingsStore.isDark">
+          <span v-if="settingsStore?.isDark">
             ☀️ {{ settingsStore?.labels?.lightMode || 'Light' }}
           </span>
           <span v-else>
             🌙 {{ settingsStore?.labels?.darkMode || 'Dark' }}
           </span>
         </button>
+
       </div>
     </div>
   </nav>
