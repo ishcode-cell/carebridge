@@ -4,122 +4,252 @@ import { useSettingsStore } from '@/stores/settings'
 
 const settingsStore = useSettingsStore()
 
-const selectedLanguage = computed({
-  get: () => settingsStore.language,
-  set: value => settingsStore.setLanguage(value)
-})
-
 const selectedTheme = computed({
   get: () => settingsStore.theme,
-  set: value => settingsStore.setTheme(value)
+  set: (value) => settingsStore.setTheme(value)
+})
+
+const selectedLanguage = computed({
+  get: () => settingsStore.language,
+  set: (value) => settingsStore.setLanguage(value)
 })
 
 const notificationsEnabled = computed({
   get: () => settingsStore.notifications,
-  set: value => settingsStore.setNotifications(value)
+  set: (value) => settingsStore.setNotifications(value)
+})
+
+const appointmentReminders = computed({
+  get: () => settingsStore.appointmentReminders,
+  set: (value) => settingsStore.setAppointmentReminders(value)
+})
+
+const smsAlerts = computed({
+  get: () => settingsStore.smsAlerts,
+  set: (value) => settingsStore.setSmsAlerts(value)
+})
+
+const publicProfile = computed({
+  get: () => settingsStore.publicProfile,
+  set: (value) => settingsStore.setPublicProfile(value)
+})
+
+const shareLocation = computed({
+  get: () => settingsStore.shareLocation,
+  set: (value) => settingsStore.setShareLocation(value)
+})
+
+const medicalRecommendations = computed({
+  get: () => settingsStore.medicalRecommendations,
+  set: (value) => settingsStore.setMedicalRecommendations(value)
+})
+
+const twoFactorAuth = computed({
+  get: () => settingsStore.twoFactorAuth,
+  set: (value) => settingsStore.setTwoFactorAuth(value)
 })
 
 const saveSettings = () => {
-  settingsStore.setLanguage(selectedLanguage.value)
-  settingsStore.setTheme(selectedTheme.value)
-  settingsStore.setNotifications(notificationsEnabled.value)
-  alert(settingsStore.labels.saveSettings + ' ✅')
+  alert('Settings saved successfully ✅')
 }
 </script>
 
 <template>
   <div
-    class="p-8 min-h-screen transition-colors duration-500"
-    :class="settingsStore.isDark ? 'bg-slate-950 text-slate-100' : 'bg-slate-50 text-slate-950'"
+    class="p-8 min-h-screen"
+    :class="settingsStore.isDark ? 'bg-slate-950 text-white' : 'bg-slate-100'"
   >
-    <div class="mb-8">
-      <h1
-        class="text-4xl font-bold"
-        :class="settingsStore.isDark ? 'text-cyan-300' : 'text-sky-700'"
-      >
-        {{ settingsStore.labels.settings }}
+    <div class="mb-10">
+      <h1 class="text-4xl font-bold text-blue-600">
+        SETTINGS
       </h1>
 
-      <p class="text-sm opacity-80">
-        {{ settingsStore.labels.customize }}
+      <p class="text-gray-500">
+        Manage your account and application preferences
       </p>
     </div>
 
     <div
-      class="bg-white/90 dark:bg-slate-900/90 border border-slate-200 dark:border-slate-800 p-8 rounded-[2rem] shadow-2xl backdrop-blur-sm max-w-4xl"
+      class="max-w-6xl rounded-3xl p-8 shadow-2xl"
+      :class="settingsStore.isDark ? 'bg-slate-900' : 'bg-white'"
     >
-      <div class="mb-8 grid gap-6 md:grid-cols-2">
-        <div>
-          <label class="block text-sm font-bold mb-2">
-            {{ settingsStore.labels.language }}
-          </label>
 
-          <select
-            v-model="selectedLanguage.value"
-            class="w-full rounded-3xl border border-slate-300 px-4 py-3 transition focus:border-sky-400 focus:ring-4 focus:ring-sky-100"
+      <!-- Appearance -->
+      <div class="mb-10">
+        <h2 class="text-2xl font-bold mb-6 text-blue-600">
+          Appearance
+        </h2>
+
+        <select
+          v-model="selectedTheme"
+          class="w-full p-4 border rounded-xl text-black"
+        >
+          <option value="Light">Light</option>
+          <option value="Dark">Dark</option>
+        </select>
+      </div>
+
+      <!-- Language -->
+      <div class="mb-10">
+        <h2 class="text-2xl font-bold mb-6 text-blue-600">
+          Language
+        </h2>
+
+        <select
+          v-model="selectedLanguage"
+          class="w-full p-4 border rounded-xl text-black"
+        >
+          <option
+            v-for="lang in settingsStore.languages"
+            :key="lang"
+            :value="lang"
           >
-            <option
-              v-for="lang in settingsStore.languages"
-              :key="lang"
-              :value="lang"
-            >
-              {{ lang }}
-            </option>
-          </select>
-        </div>
+            {{ lang }}
+          </option>
+        </select>
+      </div>
 
-        <div>
-          <label class="block text-sm font-bold mb-2">
-            {{ settingsStore.labels.selectTheme }}
-          </label>
+      <!-- Notifications -->
+      <div class="mb-10">
+        <h2 class="text-2xl font-bold mb-6 text-blue-600">
+          Notifications
+        </h2>
 
-          <select
-            v-model="selectedTheme.value"
-            class="w-full rounded-3xl border border-slate-300 px-4 py-3 transition focus:border-cyan-400 focus:ring-4 focus:ring-cyan-100"
-          >
-            <option>Light</option>
-            <option>Dark</option>
-          </select>
+        <div class="space-y-5">
+
+          <div class="flex justify-between items-center">
+            <span>Email Notifications</span>
+            <input
+              type="checkbox"
+              v-model="notificationsEnabled"
+            />
+          </div>
+
+          <div class="flex justify-between items-center">
+            <span>Appointment Reminders</span>
+            <input
+              type="checkbox"
+              v-model="appointmentReminders"
+            />
+          </div>
+
+          <div class="flex justify-between items-center">
+            <span>SMS Alerts</span>
+            <input
+              type="checkbox"
+              v-model="smsAlerts"
+            />
+          </div>
+
         </div>
       </div>
 
-      <div class="flex items-center justify-between rounded-3xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-950/80 p-5 mb-8 shadow-inner">
-        <div>
-          <p class="font-semibold">{{ settingsStore.labels.emailNotifications }}</p>
-          <p class="text-sm opacity-70">{{ settingsStore.labels.notifications }}</p>
+      <!-- Privacy -->
+      <div class="mb-10">
+        <h2 class="text-2xl font-bold mb-6 text-blue-600">
+          Privacy
+        </h2>
+
+        <div class="space-y-5">
+
+          <div class="flex justify-between items-center">
+            <span>Public Profile</span>
+            <input
+              type="checkbox"
+              v-model="publicProfile"
+            />
+          </div>
+
+          <div class="flex justify-between items-center">
+            <span>Share Location with Hospitals</span>
+            <input
+              type="checkbox"
+              v-model="shareLocation"
+            />
+          </div>
+
+          <div class="flex justify-between items-center">
+            <span>Medical Recommendations</span>
+            <input
+              type="checkbox"
+              v-model="medicalRecommendations"
+            />
+          </div>
+
         </div>
-        <label class="inline-flex items-center gap-3 cursor-pointer">
-          <span class="text-sm">{{ notificationsEnabled.value ? 'ON' : 'OFF' }}</span>
+      </div>
+
+      <!-- Security -->
+      <div class="mb-10">
+        <h2 class="text-2xl font-bold mb-6 text-blue-600">
+          Security
+        </h2>
+
+        <div class="flex justify-between items-center mb-5">
+          <span>Two Factor Authentication</span>
+
           <input
             type="checkbox"
-            class="h-5 w-5 rounded border-slate-300 text-cyan-600 shadow-sm focus:ring-cyan-500"
-            v-model="notificationsEnabled.value"
+            v-model="twoFactorAuth"
           />
-        </label>
+        </div>
+
+        <div class="grid md:grid-cols-2 gap-4">
+
+          <button
+            class="bg-amber-500 text-white p-4 rounded-xl hover:bg-amber-400"
+          >
+            Change Password
+          </button>
+
+          <button
+            class="bg-green-600 text-white p-4 rounded-xl hover:bg-green-500"
+          >
+            Security Center
+          </button>
+
+        </div>
       </div>
 
-      <div class="mt-8 flex flex-wrap gap-4">
-        <button
-          class="rounded-3xl bg-amber-500 px-6 py-3 text-white shadow-xl transition hover:bg-amber-400"
-          type="button"
-        >
-          {{ settingsStore.labels.changePassword }}
-        </button>
+      <!-- System -->
+      <div class="mb-10">
+        <h2 class="text-2xl font-bold mb-6 text-blue-600">
+          System Information
+        </h2>
+
+        <div class="space-y-3">
+          <p><strong>App:</strong> CareBridge</p>
+          <p><strong>Version:</strong> 1.0.0</p>
+          <p>
+            <strong>Status:</strong>
+            <span class="text-green-500 font-bold">Online</span>
+          </p>
+        </div>
+      </div>
+
+      <!-- Danger Zone -->
+      <div
+        class="border-t pt-8"
+        :class="settingsStore.isDark ? 'border-slate-700' : 'border-gray-300'"
+      >
+        <h2 class="text-2xl font-bold mb-6 text-red-500">
+          Danger Zone
+        </h2>
 
         <button
-          class="rounded-3xl bg-rose-600 px-6 py-3 text-white shadow-xl transition hover:bg-rose-500"
-          type="button"
+          class="bg-red-600 text-white px-6 py-3 rounded-xl hover:bg-red-500"
         >
-          {{ settingsStore.labels.deleteAccount }}
+          Delete Account
         </button>
       </div>
 
       <button
         @click="saveSettings"
-        class="mt-10 inline-flex items-center justify-center rounded-full bg-sky-600 px-8 py-3 text-white font-bold shadow-2xl transition hover:bg-sky-500"
+        class="mt-10 w-full bg-blue-600 text-white py-4 rounded-2xl font-bold hover:bg-blue-500"
       >
-        {{ settingsStore.labels.saveSettings }}
+        SAVE ALL SETTINGS
       </button>
+
     </div>
   </div>
 </template>

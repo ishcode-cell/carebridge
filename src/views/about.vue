@@ -1,37 +1,44 @@
+```vue
 <script setup>
 import { useSettingsStore } from '@/stores/settings'
+
+import {
+  LightBulbIcon,
+  RocketLaunchIcon,
+  ShieldCheckIcon,
+  SparklesIcon,
+  GlobeAltIcon,
+  HeartIcon
+} from '@heroicons/vue/24/solid'
 
 const settingsStore = useSettingsStore()
 </script>
 
 <template>
-  <div class="transition-colors duration-500"
-    :class="settingsStore.isDark ? 'bg-slate-950' : 'bg-white'">
+  <div
+    class="transition-colors duration-500"
+    :class="settingsStore.isDark ? 'bg-slate-950 text-white' : 'bg-white text-black'"
+  >
 
     <!-- HERO -->
-    <section
-      class="relative h-[70vh] flex items-center justify-center transition-colors"
-      :class="settingsStore.isDark ? 'bg-slate-900' : ''"
-    >
+    <section class="relative h-[70vh] flex items-center justify-center">
+
       <img
-        src="@/assets/images/about-hero.jpg"
+        src="https://images.unsplash.com/photo-1631815588090-d4bfec5b1ccb"
         class="absolute inset-0 w-full h-full object-cover"
-      />
+        alt="About CareBridge"
+      >
 
-      <div class="absolute inset-0 bg-blue-950/70"></div>
+      <div class="absolute inset-0 bg-blue-950/75"></div>
 
-      <div class="relative text-center text-white px-6">
+      <div class="relative z-10 text-center text-white px-6">
 
-        <h1
-          class="text-5xl md:text-7xl font-bold mb-6"
-        >
-          {{ settingsStore.labels.aboutCareBridge }}
+        <h1 class="text-5xl md:text-7xl font-bold mb-6">
+          ABOUT CAREBRIDGE
         </h1>
 
-        <p
-          class="text-xl max-w-3xl mx-auto"
-        >
-          {{ settingsStore.labels.connectingPatients }}
+        <p class="text-xl max-w-3xl mx-auto">
+          Connecting patients and healthcare providers through technology.
         </p>
 
       </div>
@@ -39,36 +46,39 @@ const settingsStore = useSettingsStore()
     </section>
 
     <!-- OUR STORY -->
-    <section class="py-24 transition-colors"
-      :class="settingsStore.isDark ? 'bg-slate-900' : ''">
+    <section
+      class="py-24"
+      :class="settingsStore.isDark ? 'bg-slate-900' : 'bg-white'"
+    >
 
-      <div
-        class="max-w-7xl mx-auto px-6 grid md:grid-cols-2 gap-12 items-center"
-      >
+      <div class="max-w-7xl mx-auto px-6 grid md:grid-cols-2 gap-12 items-center">
 
         <img
-          src="@/assets/images/about-story.jpg"
-          class="rounded-3xl shadow-xl"
-        />
+          src="https://images.unsplash.com/photo-1576091160399-112ba8d25d1d"
+          class="rounded-3xl shadow-2xl"
+          alt="Healthcare"
+        >
 
         <div>
 
           <h2
-            class="text-4xl font-bold mb-6 transition-colors"
+            class="text-4xl font-bold mb-6"
             :class="settingsStore.isDark ? 'text-blue-400' : 'text-blue-700'"
           >
-            {{ settingsStore.labels.ourStory }}
+            OUR STORY
           </h2>
 
           <p
-            class="text-lg leading-relaxed transition-colors"
+            class="text-lg leading-relaxed"
             :class="settingsStore.isDark ? 'text-slate-400' : 'text-gray-600'"
           >
-            CareBridge was created to make healthcare access easier
-            for everyone. Many patients struggle to find hospitals,
-            schedule appointments, and access healthcare information.
+            CareBridge was created to simplify healthcare access for everyone.
+            Many patients struggle to find hospitals, book appointments,
+            and obtain healthcare information quickly.
+
             Our platform bridges the gap between patients and healthcare
-            providers through a simple and modern digital experience.
+            providers through a modern digital experience that saves time,
+            improves communication, and makes healthcare more accessible.
           </p>
 
         </div>
@@ -78,59 +88,67 @@ const settingsStore = useSettingsStore()
     </section>
 
     <!-- MISSION & VISION -->
-    <section class="py-24 transition-colors"
-      :class="settingsStore.isDark ? 'bg-slate-800' : 'bg-blue-50'">
+    <section
+      class="py-24"
+      :class="settingsStore.isDark ? 'bg-slate-800' : 'bg-blue-50'"
+    >
 
       <div class="max-w-7xl mx-auto px-6">
 
         <div class="grid md:grid-cols-2 gap-10">
 
+          <!-- Mission -->
           <div
-            class="p-10 rounded-3xl shadow-lg transition-colors"
+            class="p-10 rounded-3xl shadow-xl hover:-translate-y-2 transition-all duration-300"
             :class="settingsStore.isDark ? 'bg-slate-700' : 'bg-white'"
           >
 
-            <div class="text-5xl mb-4">
-              🎯
-            </div>
+            <LightBulbIcon
+              class="w-16 h-16 mb-5"
+              :class="settingsStore.isDark ? 'text-blue-400' : 'text-blue-600'"
+            />
 
             <h3
-              class="text-3xl font-bold mb-4 transition-colors"
+              class="text-3xl font-bold mb-4"
               :class="settingsStore.isDark ? 'text-blue-400' : 'text-blue-700'"
             >
-              {{ settingsStore.labels.ourMission }}
+              OUR MISSION
             </h3>
 
-            <p class="transition-colors"
-              :class="settingsStore.isDark ? 'text-slate-400' : 'text-gray-600'">
-              To improve healthcare accessibility by helping
-              patients discover hospitals, schedule appointments,
-              and access healthcare services efficiently.
+            <p
+              :class="settingsStore.isDark ? 'text-slate-400' : 'text-gray-600'"
+            >
+              To improve healthcare accessibility by helping patients
+              discover hospitals, schedule appointments, and access
+              healthcare services efficiently.
             </p>
 
           </div>
 
+          <!-- Vision -->
           <div
-            class="p-10 rounded-3xl shadow-lg transition-colors"
+            class="p-10 rounded-3xl shadow-xl hover:-translate-y-2 transition-all duration-300"
             :class="settingsStore.isDark ? 'bg-slate-700' : 'bg-white'"
           >
 
-            <div class="text-5xl mb-4">
-              🚀
-            </div>
+            <RocketLaunchIcon
+              class="w-16 h-16 mb-5"
+              :class="settingsStore.isDark ? 'text-blue-400' : 'text-blue-600'"
+            />
 
             <h3
-              class="text-3xl font-bold mb-4 transition-colors"
+              class="text-3xl font-bold mb-4"
               :class="settingsStore.isDark ? 'text-blue-400' : 'text-blue-700'"
             >
-              {{ settingsStore.labels.ourVision }}
+              OUR VISION
             </h3>
 
-            <p class="transition-colors"
-              :class="settingsStore.isDark ? 'text-slate-400' : 'text-gray-600'">
-              To become a trusted healthcare platform that
-              connects communities with quality healthcare
-              services across Rwanda and beyond.
+            <p
+              :class="settingsStore.isDark ? 'text-slate-400' : 'text-gray-600'"
+            >
+              To become a trusted healthcare platform connecting
+              communities with quality healthcare services across
+              Rwanda and beyond.
             </p>
 
           </div>
@@ -141,69 +159,89 @@ const settingsStore = useSettingsStore()
 
     </section>
 
-    <!-- VALUES -->
-    <section class="py-24 transition-colors"
-      :class="settingsStore.isDark ? 'bg-slate-900' : ''">
+    <!-- CORE VALUES -->
+    <section
+      class="py-24"
+      :class="settingsStore.isDark ? 'bg-slate-900' : 'bg-white'"
+    >
 
       <div class="max-w-7xl mx-auto px-6">
 
         <h2
-          class="text-4xl font-bold text-center mb-14 transition-colors"
+          class="text-4xl font-bold text-center mb-16"
           :class="settingsStore.isDark ? 'text-blue-400' : 'text-blue-700'"
         >
-          {{ settingsStore.labels.coreValues }}
+          CORE VALUES
         </h2>
 
         <div class="grid md:grid-cols-4 gap-8">
 
+          <!-- Trust -->
           <div
-            class="p-8 rounded-3xl shadow-lg text-center hover:-translate-y-2 transition transition-colors"
+            class="p-8 rounded-3xl shadow-xl text-center hover:-translate-y-2 transition-all duration-300"
             :class="settingsStore.isDark ? 'bg-slate-800' : 'bg-white'"
           >
-            <div class="text-5xl mb-4">
-              🤝
-            </div>
 
-            <h3 class="font-bold text-xl transition-colors"
-              :class="settingsStore.isDark ? 'text-slate-100' : ''">
-              Trust
-            </h3>
-          </div>
-
-          <div
-            class="bg-white p-8 rounded-3xl shadow-lg text-center hover:-translate-y-2 transition"
-          >
-            <div class="text-5xl mb-4">
-              💡
-            </div>
+            <ShieldCheckIcon
+              class="w-14 h-14 mx-auto mb-4"
+              :class="settingsStore.isDark ? 'text-blue-400' : 'text-blue-600'"
+            />
 
             <h3 class="font-bold text-xl">
-              Innovation
+              TRUST
             </h3>
+
           </div>
 
+          <!-- Innovation -->
           <div
-            class="bg-white p-8 rounded-3xl shadow-lg text-center hover:-translate-y-2 transition"
+            class="p-8 rounded-3xl shadow-xl text-center hover:-translate-y-2 transition-all duration-300"
+            :class="settingsStore.isDark ? 'bg-slate-800' : 'bg-white'"
           >
-            <div class="text-5xl mb-4">
-              🌍
-            </div>
+
+            <SparklesIcon
+              class="w-14 h-14 mx-auto mb-4"
+              :class="settingsStore.isDark ? 'text-blue-400' : 'text-blue-600'"
+            />
 
             <h3 class="font-bold text-xl">
-              Accessibility
+              INNOVATION
             </h3>
+
           </div>
 
+          <!-- Accessibility -->
           <div
-            class="bg-white p-8 rounded-3xl shadow-lg text-center hover:-translate-y-2 transition"
+            class="p-8 rounded-3xl shadow-xl text-center hover:-translate-y-2 transition-all duration-300"
+            :class="settingsStore.isDark ? 'bg-slate-800' : 'bg-white'"
           >
-            <div class="text-5xl mb-4">
-              ❤️
-            </div>
+
+            <GlobeAltIcon
+              class="w-14 h-14 mx-auto mb-4"
+              :class="settingsStore.isDark ? 'text-blue-400' : 'text-blue-600'"
+            />
 
             <h3 class="font-bold text-xl">
-              Care
+              ACCESSIBILITY
             </h3>
+
+          </div>
+
+          <!-- Care -->
+          <div
+            class="p-8 rounded-3xl shadow-xl text-center hover:-translate-y-2 transition-all duration-300"
+            :class="settingsStore.isDark ? 'bg-slate-800' : 'bg-white'"
+          >
+
+            <HeartIcon
+              class="w-14 h-14 mx-auto mb-4"
+              :class="settingsStore.isDark ? 'text-blue-400' : 'text-blue-600'"
+            />
+
+            <h3 class="font-bold text-xl">
+              CARE
+            </h3>
+
           </div>
 
         </div>
@@ -213,18 +251,23 @@ const settingsStore = useSettingsStore()
     </section>
 
     <!-- WHY WE EXIST -->
-    <section class="bg-gray-50 py-24">
+    <section
+      class="py-24"
+      :class="settingsStore.isDark ? 'bg-slate-800' : 'bg-blue-50'"
+    >
 
       <div class="max-w-5xl mx-auto text-center px-6">
 
         <h2
-          class="text-4xl font-bold text-blue-700 mb-6"
+          class="text-4xl font-bold mb-6"
+          :class="settingsStore.isDark ? 'text-blue-400' : 'text-blue-700'"
         >
-          Why We Exist
+          WHY WE EXIST
         </h2>
 
         <p
-          class="text-lg text-gray-600 leading-relaxed"
+          class="text-lg leading-relaxed"
+          :class="settingsStore.isDark ? 'text-slate-400' : 'text-gray-600'"
         >
           Healthcare should be accessible, simple, and efficient.
           CareBridge exists to remove barriers between patients
@@ -237,27 +280,26 @@ const settingsStore = useSettingsStore()
     </section>
 
     <!-- CTA -->
-    <section class=" text-black py-24">
+    <section class="py-24">
 
       <div class="max-w-4xl mx-auto text-center px-6">
 
-        <h2
-          class="text-5xl font-bold mb-6"
-        >
-          Join CareBridge Today
+        <h2 class="text-5xl font-bold mb-6">
+          JOIN CAREBRIDGE TODAY
         </h2>
 
         <p
-          class="text-xl mb-8"
+          class="text-xl mb-10"
+          :class="settingsStore.isDark ? 'text-slate-400' : 'text-gray-600'"
         >
           Experience a smarter way to connect with healthcare services.
         </p>
 
         <router-link
           to="/register"
-          class="bg-blue-700 text-white px-8 py-4 rounded-2xl font-bold"
+          class="bg-blue-700 text-white px-10 py-4 rounded-2xl font-bold hover:bg-blue-800 transition"
         >
-          Create Account
+          CREATE ACCOUNT
         </router-link>
 
       </div>
@@ -266,3 +308,4 @@ const settingsStore = useSettingsStore()
 
   </div>
 </template>
+```

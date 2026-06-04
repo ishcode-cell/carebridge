@@ -1,185 +1,229 @@
 <script setup>
 import { useSettingsStore } from '@/stores/settings'
 
+import {
+  BuildingOffice2Icon,
+  CalendarDaysIcon,
+  GlobeAltIcon,
+  MapPinIcon,
+  UserCircleIcon,
+  ShieldCheckIcon
+} from '@heroicons/vue/24/solid'
+
 const settingsStore = useSettingsStore()
 </script>
 
 <template>
-  <div class="transition-colors duration-500"
-    :class="settingsStore.isDark ? 'bg-slate-950' : 'bg-white'">
+  <div
+    class="transition-colors duration-500"
+    :class="settingsStore.isDark ? 'bg-slate-950 text-white' : 'bg-white text-black'"
+  >
 
     <!-- HERO -->
-    <section class="relative h-[70vh] flex items-center justify-center transition-colors"
-      :class="settingsStore.isDark ? 'bg-slate-900' : ''">
-
+    <section
+      class="relative h-[70vh] flex items-center justify-center"
+    >
       <img
-        src="@/assets/images/services-hero.jpg"
+        src="https://images.unsplash.com/photo-1586773860418-d37222d8fce3"
+        alt="Healthcare Services"
         class="absolute inset-0 w-full h-full object-cover"
-        alt="Services"
       >
 
-      <div class="absolute inset-0 bg-blue-950/70"></div>
+      <div class="absolute inset-0 bg-blue-950/75"></div>
 
-      <div class="relative text-center text-white px-6">
-
-        <h1
-          class="text-5xl md:text-7xl font-bold mb-6"
-        >
-          {{ settingsStore.labels.services }}
+      <div class="relative z-10 text-center text-white px-6">
+        <h1 class="text-5xl md:text-7xl font-bold mb-6">
+          OUR SERVICES
         </h1>
 
-        <p
-          class="text-xl max-w-3xl mx-auto"
-        >
-          Discover how CareBridge helps patients connect with healthcare providers faster and more efficiently.
+        <p class="text-xl max-w-3xl mx-auto">
+          CareBridge helps patients find hospitals, book appointments,
+          manage healthcare records, and access medical services easily.
         </p>
-
       </div>
-
     </section>
 
-    <!-- SERVICES GRID -->
-    <section class="py-24 transition-colors"
-      :class="settingsStore.isDark ? 'bg-slate-900' : ''">
-
+    <!-- SERVICES -->
+    <section
+      class="py-24"
+      :class="settingsStore.isDark ? 'bg-slate-900' : 'bg-white'"
+    >
       <div class="max-w-7xl mx-auto px-6">
 
         <h2
-          class="text-4xl font-bold text-center mb-14 transition-colors"
+          class="text-4xl font-bold text-center mb-16"
           :class="settingsStore.isDark ? 'text-blue-400' : 'text-blue-700'"
         >
-          What We Offer
+          WHAT WE OFFER
         </h2>
 
         <div class="grid md:grid-cols-3 gap-8">
 
           <!-- Hospital Finder -->
           <div
-            class="p-8 rounded-3xl shadow-xl hover:-translate-y-2 transition-all duration-300 transition-colors"
+            class="rounded-3xl p-8 shadow-xl hover:-translate-y-2 transition-all duration-300"
             :class="settingsStore.isDark ? 'bg-slate-800' : 'bg-white'"
           >
-            <div class="text-6xl mb-5">🏥</div>
+            <BuildingOffice2Icon
+              class="w-16 h-16 mb-5"
+              :class="settingsStore.isDark ? 'text-blue-400' : 'text-blue-600'"
+            />
 
-            <h3 class="text-2xl font-bold mb-4 transition-colors"
-              :class="settingsStore.isDark ? 'text-blue-400' : 'text-blue-700'">
-              {{ settingsStore.labels.hospitalFinder }}
+            <h3
+              class="text-2xl font-bold mb-4"
+              :class="settingsStore.isDark ? 'text-blue-400' : 'text-blue-700'"
+            >
+              Hospital Finder
             </h3>
 
-            <p class="transition-colors"
-              :class="settingsStore.isDark ? 'text-slate-400' : 'text-gray-600'">
-              {{ settingsStore.labels.hospitalFinderDesc }}
+            <p
+              :class="settingsStore.isDark ? 'text-slate-400' : 'text-gray-600'"
+            >
+              Find nearby hospitals based on your current location and get
+              directions instantly.
             </p>
           </div>
 
           <!-- Appointment Booking -->
           <div
-            class="p-8 rounded-3xl shadow-xl hover:-translate-y-2 transition-all duration-300 transition-colors"
+            class="rounded-3xl p-8 shadow-xl hover:-translate-y-2 transition-all duration-300"
             :class="settingsStore.isDark ? 'bg-slate-800' : 'bg-white'"
           >
-            <div class="text-6xl mb-5">📅</div>
+            <CalendarDaysIcon
+              class="w-16 h-16 mb-5"
+              :class="settingsStore.isDark ? 'text-blue-400' : 'text-blue-600'"
+            />
 
-            <h3 class="text-2xl font-bold mb-4 transition-colors"
-              :class="settingsStore.isDark ? 'text-blue-400' : 'text-blue-700'">
-              {{ settingsStore.labels.appointmentBooking }}
+            <h3
+              class="text-2xl font-bold mb-4"
+              :class="settingsStore.isDark ? 'text-blue-400' : 'text-blue-700'"
+            >
+              Appointment Booking
             </h3>
 
-            <p class="transition-colors"
-              :class="settingsStore.isDark ? 'text-slate-400' : 'text-gray-600'">
-              {{ settingsStore.labels.appointmentBookingDesc }}
+            <p
+              :class="settingsStore.isDark ? 'text-slate-400' : 'text-gray-600'"
+            >
+              Schedule appointments with doctors and specialists without
+              waiting in long queues.
             </p>
           </div>
 
-          <!-- Language Support -->
+          <!-- Multi Language -->
           <div
-            class="p-8 rounded-3xl shadow-xl hover:-translate-y-2 transition-all duration-300 transition-colors"
+            class="rounded-3xl p-8 shadow-xl hover:-translate-y-2 transition-all duration-300"
             :class="settingsStore.isDark ? 'bg-slate-800' : 'bg-white'"
           >
-            <div class="text-6xl mb-5">🌍</div>
+            <GlobeAltIcon
+              class="w-16 h-16 mb-5"
+              :class="settingsStore.isDark ? 'text-blue-400' : 'text-blue-600'"
+            />
 
-            <h3 class="text-2xl font-bold mb-4 transition-colors"
-              :class="settingsStore.isDark ? 'text-blue-400' : 'text-blue-700'">
-              {{ settingsStore.labels.multiLanguage }}
+            <h3
+              class="text-2xl font-bold mb-4"
+              :class="settingsStore.isDark ? 'text-blue-400' : 'text-blue-700'"
+            >
+              Multi-Language Support
             </h3>
 
-            <p class="transition-colors"
-              :class="settingsStore.isDark ? 'text-slate-400' : 'text-gray-600'">
-              {{ settingsStore.labels.multiLanguageDesc }}
+            <p
+              :class="settingsStore.isDark ? 'text-slate-400' : 'text-gray-600'"
+            >
+              Use CareBridge in English, French, Kinyarwanda and many other
+              languages.
             </p>
           </div>
 
-          <!-- Smart Search -->
+          <!-- Location -->
           <div
-            class="p-8 rounded-3xl shadow-xl hover:-translate-y-2 transition-all duration-300 transition-colors"
+            class="rounded-3xl p-8 shadow-xl hover:-translate-y-2 transition-all duration-300"
             :class="settingsStore.isDark ? 'bg-slate-800' : 'bg-white'"
           >
-            <div class="text-6xl mb-5">📍</div>
+            <MapPinIcon
+              class="w-16 h-16 mb-5"
+              :class="settingsStore.isDark ? 'text-blue-400' : 'text-blue-600'"
+            />
 
-            <h3 class="text-2xl font-bold mb-4 transition-colors"
-              :class="settingsStore.isDark ? 'text-blue-400' : 'text-blue-700'">
-              {{ settingsStore.labels.locationSearch }}
+            <h3
+              class="text-2xl font-bold mb-4"
+              :class="settingsStore.isDark ? 'text-blue-400' : 'text-blue-700'"
+            >
+              Smart Location Search
             </h3>
 
-            <p class="transition-colors"
-              :class="settingsStore.isDark ? 'text-slate-400' : 'text-gray-600'">
-              {{ settingsStore.labels.locationSearchDesc }}
+            <p
+              :class="settingsStore.isDark ? 'text-slate-400' : 'text-gray-600'"
+            >
+              Locate healthcare facilities near your area using GPS and maps.
             </p>
           </div>
 
-          <!-- Account Management -->
+          <!-- Accounts -->
           <div
-            class="p-8 rounded-3xl shadow-xl hover:-translate-y-2 transition-all duration-300 transition-colors"
+            class="rounded-3xl p-8 shadow-xl hover:-translate-y-2 transition-all duration-300"
             :class="settingsStore.isDark ? 'bg-slate-800' : 'bg-white'"
           >
-            <div class="text-6xl mb-5">👤</div>
+            <UserCircleIcon
+              class="w-16 h-16 mb-5"
+              :class="settingsStore.isDark ? 'text-blue-400' : 'text-blue-600'"
+            />
 
-            <h3 class="text-2xl font-bold mb-4 transition-colors"
-              :class="settingsStore.isDark ? 'text-blue-400' : 'text-blue-700'">
-              {{ settingsStore.labels.personalAccounts }}
+            <h3
+              class="text-2xl font-bold mb-4"
+              :class="settingsStore.isDark ? 'text-blue-400' : 'text-blue-700'"
+            >
+              Personal Accounts
             </h3>
 
-            <p class="transition-colors"
-              :class="settingsStore.isDark ? 'text-slate-400' : 'text-gray-600'">
-              {{ settingsStore.labels.personalAccountsDesc }}
+            <p
+              :class="settingsStore.isDark ? 'text-slate-400' : 'text-gray-600'"
+            >
+              Manage appointments, profile information, and healthcare
+              history in one place.
             </p>
           </div>
 
-          <!-- Secure Platform -->
+          <!-- Security -->
           <div
-            class="p-8 rounded-3xl shadow-xl hover:-translate-y-2 transition-all duration-300 transition-colors"
+            class="rounded-3xl p-8 shadow-xl hover:-translate-y-2 transition-all duration-300"
             :class="settingsStore.isDark ? 'bg-slate-800' : 'bg-white'"
           >
-            <div class="text-6xl mb-5">🔒</div>
+            <ShieldCheckIcon
+              class="w-16 h-16 mb-5"
+              :class="settingsStore.isDark ? 'text-blue-400' : 'text-blue-600'"
+            />
 
-            <h3 class="text-2xl font-bold mb-4 transition-colors"
-              :class="settingsStore.isDark ? 'text-blue-400' : 'text-blue-700'">
-              {{ settingsStore.labels.secureAccess }}
+            <h3
+              class="text-2xl font-bold mb-4"
+              :class="settingsStore.isDark ? 'text-blue-400' : 'text-blue-700'"
+            >
+              Secure Access
             </h3>
 
-            <p class="transition-colors"
-              :class="settingsStore.isDark ? 'text-slate-400' : 'text-gray-600'">
-              {{ settingsStore.labels.secureAccessDesc }}
+            <p
+              :class="settingsStore.isDark ? 'text-slate-400' : 'text-gray-600'"
+            >
+              Your medical information is protected with modern security
+              standards.
             </p>
           </div>
 
         </div>
-
       </div>
-
     </section>
 
     <!-- HOW IT WORKS -->
-    <section class="py-24 transition-colors"
-      :class="settingsStore.isDark ? 'bg-slate-800' : 'bg-blue-50'">
-
+    <section
+      class="py-24"
+      :class="settingsStore.isDark ? 'bg-slate-800' : 'bg-blue-50'"
+    >
       <div class="max-w-7xl mx-auto px-6">
 
-        <h2
-          class="text-4xl font-bold text-center text-blue-700 mb-16"
-        >
-          How CareBridge Works
+        <h2 class="text-4xl font-bold text-center text-blue-700 mb-16">
+          HOW CAREBRIDGE WORKS
         </h2>
 
-        <div class="grid md:grid-cols-3 gap-8 text-center">
+        <div class="grid md:grid-cols-3 gap-10 text-center">
 
           <div>
             <div
@@ -189,11 +233,11 @@ const settingsStore = useSettingsStore()
             </div>
 
             <h3 class="text-2xl font-bold mb-3">
-              Create Account
+              CREATE ACCOUNT
             </h3>
 
             <p class="text-gray-600">
-              Register and access your personal healthcare dashboard.
+              Register and access your healthcare dashboard.
             </p>
           </div>
 
@@ -205,11 +249,11 @@ const settingsStore = useSettingsStore()
             </div>
 
             <h3 class="text-2xl font-bold mb-3">
-              Find a Hospital
+              FIND HOSPITAL
             </h3>
 
             <p class="text-gray-600">
-              Search nearby hospitals using smart location technology.
+              Search hospitals near your location.
             </p>
           </div>
 
@@ -221,27 +265,24 @@ const settingsStore = useSettingsStore()
             </div>
 
             <h3 class="text-2xl font-bold mb-3">
-              Book Appointment
+              BOOK APPOINTMENT
             </h3>
 
             <p class="text-gray-600">
-              Choose a hospital and schedule your appointment.
+              Choose a doctor and schedule your visit.
             </p>
           </div>
 
         </div>
-
       </div>
-
     </section>
 
     <!-- CTA -->
-    <section class=" text-black py-24">
-
+    <section class="py-24">
       <div class="max-w-4xl mx-auto text-center px-6">
 
         <h2 class="text-5xl font-bold mb-6">
-          Ready to Get Started?
+          READY TO GET STARTED?
         </h2>
 
         <p class="text-xl mb-8">
@@ -250,13 +291,12 @@ const settingsStore = useSettingsStore()
 
         <router-link
           to="/register"
-          class="bg-blue-700 text-white px-8 py-4 rounded-2xl font-bold hover:bg-gray-100 transition"
+          class="bg-blue-700 text-white px-8 py-4 rounded-2xl font-bold hover:bg-blue-800 transition"
         >
-          Create Account
+          CREATE ACCOUNT
         </router-link>
 
       </div>
-
     </section>
 
   </div>

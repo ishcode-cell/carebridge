@@ -1,227 +1,96 @@
 <script setup>
-import { ref, onMounted, onBeforeUnmount } from 'vue'
 import { useSettingsStore } from '@/stores/settings'
 
-import hero1 from '@/assets/images/hero1.jpg'
-import hero2 from '@/assets/images/hero2.jpg'
-import hero3 from '@/assets/images/hero3.jpg'
+import {
+  HeartIcon,
+  BuildingOffice2Icon,
+  CalendarDaysIcon,
+  MapPinIcon,
+  ShieldCheckIcon,
+  UserGroupIcon
+} from '@heroicons/vue/24/solid'
 
 const settingsStore = useSettingsStore()
-
-const slides = [
-  {
-    image: hero1,
-    title: 'Find Hospitals Near You',
-    subtitle: 'Access healthcare services quickly and conveniently.'
-  },
-  {
-    image: hero2,
-    title: 'Book Appointments Online',
-    subtitle: 'Save time and connect with healthcare providers.'
-  },
-  {
-    image: hero3,
-    title: 'Welcome to CareBridge',
-    subtitle: 'Your bridge to better healthcare.'
-  }
-]
-
-const currentSlide = ref(0)
-
-let interval
-
-const nextSlide = () => {
-  currentSlide.value = (currentSlide.value + 1) % slides.length
-}
-
-const prevSlide = () => {
-  currentSlide.value =
-    (currentSlide.value - 1 + slides.length) % slides.length
-}
-
-onMounted(() => {
-  interval = setInterval(nextSlide, 5000)
-})
-
-onBeforeUnmount(() => {
-  clearInterval(interval)
-})
 </script>
 
 <template>
-  <div class="transition-colors duration-500"
-    :class="settingsStore.isDark ? 'bg-slate-950' : 'bg-white'">
+  <div
+    class="transition-colors duration-500"
+    :class="settingsStore.isDark ? 'bg-slate-950 text-white' : 'bg-white text-black'"
+  >
 
     <!-- HERO -->
-    <section class="relative h-screen overflow-hidden">
+    <section class="relative min-h-screen flex items-center justify-center">
 
-      <div
-        v-for="(slide, index) in slides"
-        :key="index"
-        class="absolute inset-0 transition-all duration-1000"
-        :class="currentSlide === index ? 'opacity-100' : 'opacity-0'"
+      <img
+        src="https://images.unsplash.com/photo-1586773860418-d37222d8fce3"
+        class="absolute inset-0 w-full h-full object-cover"
+        alt="Healthcare"
       >
-        <img
-          :src="slide.image"
-          class="w-full h-full object-cover"
-        />
 
-        <div class="absolute inset-0 bg-blue-950/60"></div>
+      <div class="absolute inset-0 bg-blue-950/75"></div>
 
-        <div
-          class="absolute inset-0 flex flex-col justify-center items-center text-center text-white px-6"
-        >
-          <h1
-            class="text-5xl md:text-7xl font-bold mb-6"
+      <div class="relative z-10 text-center px-6 text-white">
+
+        <h1 class="text-6xl md:text-8xl font-extrabold mb-6">
+          CAREBRIDGE
+        </h1>
+
+        <p class="text-xl md:text-2xl max-w-4xl mx-auto mb-10">
+          Connecting patients to hospitals, doctors and healthcare services
+          faster, easier and smarter across Rwanda.
+        </p>
+
+        <div class="flex flex-col md:flex-row justify-center gap-5">
+
+          <router-link
+            to="/register"
+            class="bg-blue-600 hover:bg-blue-700 px-8 py-4 rounded-2xl font-bold transition"
           >
-            {{ slide.title }}
-          </h1>
+            GET STARTED
+          </router-link>
 
-          <p
-            class="text-xl md:text-2xl max-w-3xl mb-8"
+          <router-link
+            to="/services"
+            class="bg-white text-blue-700 px-8 py-4 rounded-2xl font-bold hover:bg-gray-100 transition"
           >
-            {{ slide.subtitle }}
-          </p>
-
-          <div class="flex gap-4 flex-wrap justify-center">
-
-            <router-link
-              to="/login"
-              class="bg-blue-600 hover:bg-blue-700 px-8 py-4 rounded-2xl font-bold transition"
-            >
-              Get Started
-            </router-link>
-
-            <router-link
-              to="/register"
-              class="bg-white text-blue-700 px-8 py-4 rounded-2xl font-bold"
-            >
-              Create Account
-            </router-link>
-
-          </div>
+            OUR SERVICES
+          </router-link>
 
         </div>
-      </div>
 
-      <!-- LEFT -->
-      <button
-        @click="prevSlide"
-        class="absolute left-5 top-1/2 -translate-y-1/2 bg-white/20 backdrop-blur text-white w-12 h-12 rounded-full"
-      >
-        ❮
-      </button>
-
-      <!-- RIGHT -->
-      <button
-        @click="nextSlide"
-        class="absolute right-5 top-1/2 -translate-y-1/2 bg-white/20 backdrop-blur text-white w-12 h-12 rounded-full"
-      >
-        ❯
-      </button>
-
-      <!-- DOTS -->
-      <div
-        class="absolute bottom-10 left-1/2 -translate-x-1/2 flex gap-3"
-      >
-        <button
-          v-for="(_, index) in slides"
-          :key="index"
-          @click="currentSlide = index"
-          class="w-3 h-3 rounded-full"
-          :class="
-            currentSlide === index
-              ? 'bg-white'
-              : 'bg-white/50'
-          "
-        />
       </div>
 
     </section>
 
-    <!-- TRUST -->
-    <section class="py-20 transition-colors duration-500"
-      :class="settingsStore.isDark ? 'bg-slate-900' : 'bg-white'">
+    <!-- STATS -->
+    <section
+      class="py-16"
+      :class="settingsStore.isDark ? 'bg-slate-900' : 'bg-blue-50'"
+    >
 
-      <div class="max-w-6xl mx-auto px-6">
+      <div class="max-w-7xl mx-auto px-6">
 
-        <h2
-          class="text-4xl font-bold text-center mb-14 transition-colors"
-          :class="settingsStore.isDark ? 'text-blue-400' : 'text-blue-700'"
-        >
-          Trusted Healthcare Platform
-        </h2>
+        <div class="grid md:grid-cols-4 gap-8">
 
-        <div
-          class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center"
-        >
-
-          <div
-            class="p-8 rounded-3xl shadow transition-colors"
-            :class="settingsStore.isDark ? 'bg-slate-800' : 'bg-blue-50'"
-          >
-            <h3
-              class="text-4xl font-bold transition-colors"
-              :class="settingsStore.isDark ? 'text-blue-400' : 'text-blue-700'"
-            >
-              50+
-            </h3>
-
-            <p class="mt-2 transition-colors"
-              :class="settingsStore.isDark ? 'text-slate-400' : 'text-gray-600'">
-              {{ settingsStore.labels.hospitals }}
-            </p>
+          <div class="text-center">
+            <h2 class="text-5xl font-bold text-blue-600">50+</h2>
+            <p class="mt-2">Hospitals</p>
           </div>
 
-          <div
-            class="p-8 rounded-3xl shadow transition-colors"
-            :class="settingsStore.isDark ? 'bg-slate-800' : 'bg-blue-50'"
-          >
-            <h3
-              class="text-4xl font-bold transition-colors"
-              :class="settingsStore.isDark ? 'text-blue-400' : 'text-blue-700'"
-            >
-              10K+
-            </h3>
-
-            <p class="mt-2 transition-colors"
-              :class="settingsStore.isDark ? 'text-slate-400' : 'text-gray-600'">
-              {{ settingsStore.labels.users }}
-            </p>
+          <div class="text-center">
+            <h2 class="text-5xl font-bold text-blue-600">200+</h2>
+            <p class="mt-2">Doctors</p>
           </div>
 
-          <div
-            class="p-8 rounded-3xl shadow transition-colors"
-            :class="settingsStore.isDark ? 'bg-slate-800' : 'bg-blue-50'"
-          >
-            <h3
-              class="text-4xl font-bold transition-colors"
-              :class="settingsStore.isDark ? 'text-blue-400' : 'text-blue-700'"
-            >
-              5K+
-            </h3>
-
-            <p class="mt-2 transition-colors"
-              :class="settingsStore.isDark ? 'text-slate-400' : 'text-gray-600'">
-              {{ settingsStore.labels.appointments }}
-            </p>
+          <div class="text-center">
+            <h2 class="text-5xl font-bold text-blue-600">10K+</h2>
+            <p class="mt-2">Patients</p>
           </div>
 
-          <div
-            class="p-8 rounded-3xl shadow transition-colors"
-            :class="settingsStore.isDark ? 'bg-slate-800' : 'bg-blue-50'"
-          >
-            <h3
-              class="text-4xl font-bold transition-colors"
-              :class="settingsStore.isDark ? 'text-blue-400' : 'text-blue-700'"
-            >
-              20+
-            </h3>
-
-            <p class="mt-2 transition-colors"
-              :class="settingsStore.isDark ? 'text-slate-400' : 'text-gray-600'">
-              Languages
-            </p>
+          <div class="text-center">
+            <h2 class="text-5xl font-bold text-blue-600">24/7</h2>
+            <p class="mt-2">Healthcare Access</p>
           </div>
 
         </div>
@@ -230,75 +99,86 @@ onBeforeUnmount(() => {
 
     </section>
 
-    <!-- BENEFITS -->
-    <section class="py-20 transition-colors duration-500"
-      :class="settingsStore.isDark ? 'bg-slate-800' : 'bg-gray-50'">
+    <!-- FEATURES -->
+    <section
+      class="py-24"
+      :class="settingsStore.isDark ? 'bg-slate-950' : 'bg-white'"
+    >
 
       <div class="max-w-7xl mx-auto px-6">
 
         <h2
-          class="text-4xl font-bold text-center mb-14 transition-colors"
+          class="text-5xl font-bold text-center mb-16"
           :class="settingsStore.isDark ? 'text-blue-400' : 'text-blue-700'"
         >
-          Why Patients Choose CareBridge
+          WHY CHOOSE CAREBRIDGE?
         </h2>
 
         <div class="grid md:grid-cols-3 gap-8">
 
           <div
-            class="p-8 rounded-3xl shadow-lg hover:-translate-y-2 transition"
-            :class="settingsStore.isDark ? 'bg-slate-700' : 'bg-white'"
+            class="p-8 rounded-3xl shadow-xl hover:-translate-y-2 transition-all"
+            :class="settingsStore.isDark ? 'bg-slate-900' : 'bg-white'"
           >
-            <div class="text-5xl mb-4">
-              📍
-            </div>
-
-            <h3 class="text-2xl font-bold mb-3 transition-colors"
-              :class="settingsStore.isDark ? 'text-slate-100' : ''">
-              Nearby Hospitals
-            </h3>
-
-            <p class="transition-colors"
-              :class="settingsStore.isDark ? 'text-slate-400' : 'text-gray-600'">
-              Discover hospitals closest to your location.
+            <BuildingOffice2Icon class="w-16 h-16 text-blue-600 mb-5" />
+            <h3 class="text-2xl font-bold mb-4">Find Hospitals</h3>
+            <p class="text-gray-500">
+              Quickly locate nearby hospitals and healthcare centers.
             </p>
           </div>
 
           <div
-            class="p-8 rounded-3xl shadow-lg hover:-translate-y-2 transition"
-            :class="settingsStore.isDark ? 'bg-slate-700' : 'bg-white'"
+            class="p-8 rounded-3xl shadow-xl hover:-translate-y-2 transition-all"
+            :class="settingsStore.isDark ? 'bg-slate-900' : 'bg-white'"
           >
-            <div class="text-5xl mb-4">
-              ⚡
-            </div>
-
-            <h3 class="text-2xl font-bold mb-3 transition-colors"
-              :class="settingsStore.isDark ? 'text-slate-100' : ''">
-              Quick Access
-            </h3>
-
-            <p class="transition-colors"
-              :class="settingsStore.isDark ? 'text-slate-400' : 'text-gray-600'">
-              Connect with healthcare services faster.
+            <CalendarDaysIcon class="w-16 h-16 text-blue-600 mb-5" />
+            <h3 class="text-2xl font-bold mb-4">Book Appointments</h3>
+            <p class="text-gray-500">
+              Schedule appointments without standing in long queues.
             </p>
           </div>
 
           <div
-            class="p-8 rounded-3xl shadow-lg hover:-translate-y-2 transition"
-            :class="settingsStore.isDark ? 'bg-slate-700' : 'bg-white'"
+            class="p-8 rounded-3xl shadow-xl hover:-translate-y-2 transition-all"
+            :class="settingsStore.isDark ? 'bg-slate-900' : 'bg-white'"
           >
-            <div class="text-5xl mb-4">
-              🌍
-            </div>
+            <MapPinIcon class="w-16 h-16 text-blue-600 mb-5" />
+            <h3 class="text-2xl font-bold mb-4">Smart Location</h3>
+            <p class="text-gray-500">
+              Discover healthcare services near your current location.
+            </p>
+          </div>
 
-            <h3 class="text-2xl font-bold mb-3 transition-colors"
-              :class="settingsStore.isDark ? 'text-slate-100' : ''">
-              Multi-Language
-            </h3>
+          <div
+            class="p-8 rounded-3xl shadow-xl hover:-translate-y-2 transition-all"
+            :class="settingsStore.isDark ? 'bg-slate-900' : 'bg-white'"
+          >
+            <ShieldCheckIcon class="w-16 h-16 text-blue-600 mb-5" />
+            <h3 class="text-2xl font-bold mb-4">Secure Access</h3>
+            <p class="text-gray-500">
+              Your personal healthcare information remains protected.
+            </p>
+          </div>
 
-            <p class="transition-colors"
-              :class="settingsStore.isDark ? 'text-slate-400' : 'text-gray-600'">
-              Available in multiple languages for everyone.
+          <div
+            class="p-8 rounded-3xl shadow-xl hover:-translate-y-2 transition-all"
+            :class="settingsStore.isDark ? 'bg-slate-900' : 'bg-white'"
+          >
+            <UserGroupIcon class="w-16 h-16 text-blue-600 mb-5" />
+            <h3 class="text-2xl font-bold mb-4">Patient Management</h3>
+            <p class="text-gray-500">
+              Manage appointments and healthcare records easily.
+            </p>
+          </div>
+
+          <div
+            class="p-8 rounded-3xl shadow-xl hover:-translate-y-2 transition-all"
+            :class="settingsStore.isDark ? 'bg-slate-900' : 'bg-white'"
+          >
+            <HeartIcon class="w-16 h-16 text-blue-600 mb-5" />
+            <h3 class="text-2xl font-bold mb-4">Better Care</h3>
+            <p class="text-gray-500">
+              Improving healthcare access and patient experience.
             </p>
           </div>
 
@@ -308,58 +188,54 @@ onBeforeUnmount(() => {
 
     </section>
 
-    <!-- TESTIMONIALS -->
-    <section class="py-20 transition-colors"
-      :class="settingsStore.isDark ? 'bg-slate-900' : ''">
+    <!-- HOW IT WORKS -->
+    <section
+      class="py-24"
+      :class="settingsStore.isDark ? 'bg-slate-900' : 'bg-blue-50'"
+    >
 
-      <div class="max-w-6xl mx-auto px-6">
+      <div class="max-w-7xl mx-auto px-6">
 
-        <h2
-          class="text-4xl font-bold text-center mb-14 transition-colors"
-          :class="settingsStore.isDark ? 'text-blue-400' : 'text-blue-700'"
-        >
-          Patient Experiences
+        <h2 class="text-5xl font-bold text-center mb-16 text-blue-600">
+          HOW IT WORKS
         </h2>
 
-        <div class="grid md:grid-cols-3 gap-8">
+        <div class="grid md:grid-cols-3 gap-10 text-center">
 
-          <div class="p-8 rounded-3xl shadow transition-colors"
-            :class="settingsStore.isDark ? 'bg-slate-800' : 'bg-white'">
-            <p class="transition-colors"
-              :class="settingsStore.isDark ? 'text-slate-400' : 'text-gray-600'">
-              "CareBridge helped me locate a hospital within minutes."
-            </p>
+          <div>
+            <div class="w-20 h-20 rounded-full bg-blue-600 text-white flex items-center justify-center mx-auto text-3xl font-bold mb-5">
+              1
+            </div>
 
-            <h4 class="font-bold mt-4 transition-colors"
-              :class="settingsStore.isDark ? 'text-slate-100' : ''">
-              Jean Claude
-            </h4>
+            <h3 class="text-2xl font-bold mb-3">
+              REGISTER
+            </h3>
+
+            <p>Create your CareBridge account.</p>
           </div>
 
-          <div class="p-8 rounded-3xl shadow transition-colors"
-            :class="settingsStore.isDark ? 'bg-slate-800' : 'bg-white'">
-            <p class="transition-colors"
-              :class="settingsStore.isDark ? 'text-slate-400' : 'text-gray-600'">
-              "Booking appointments has never been easier."
-            </p>
+          <div>
+            <div class="w-20 h-20 rounded-full bg-blue-600 text-white flex items-center justify-center mx-auto text-3xl font-bold mb-5">
+              2
+            </div>
 
-            <h4 class="font-bold mt-4 transition-colors"
-              :class="settingsStore.isDark ? 'text-slate-100' : ''">
-              Alice
-            </h4>
+            <h3 class="text-2xl font-bold mb-3">
+              FIND A HOSPITAL
+            </h3>
+
+            <p>Search hospitals near your location.</p>
           </div>
 
-          <div class="p-8 rounded-3xl shadow transition-colors"
-            :class="settingsStore.isDark ? 'bg-slate-800' : 'bg-white'">
-            <p class="transition-colors"
-              :class="settingsStore.isDark ? 'text-slate-400' : 'text-gray-600'">
-              "Simple, fast and reliable healthcare access."
-            </p>
+          <div>
+            <div class="w-20 h-20 rounded-full bg-blue-600 text-white flex items-center justify-center mx-auto text-3xl font-bold mb-5">
+              3
+            </div>
 
-            <h4 class="font-bold mt-4 transition-colors"
-              :class="settingsStore.isDark ? 'text-slate-100' : ''">
-              Patrick
-            </h4>
+            <h3 class="text-2xl font-bold mb-3">
+              BOOK APPOINTMENT
+            </h3>
+
+            <p>Choose a doctor and reserve your visit.</p>
           </div>
 
         </div>
@@ -369,27 +245,26 @@ onBeforeUnmount(() => {
     </section>
 
     <!-- CTA -->
-    <section class=" text-black py-24">
+    <section class="py-24">
 
-      <div class="max-w-4xl mx-auto text-center px-6">
+      <div class="max-w-5xl mx-auto text-center px-6">
 
-        <h2
-          class="text-5xl font-bold mb-6"
-        >
-          Start Your Healthcare Journey Today
+        <h2 class="text-5xl font-bold mb-6">
+          YOUR HEALTHCARE JOURNEY STARTS HERE
         </h2>
 
         <p
-          class="text-xl mb-8"
+          class="text-xl mb-10"
+          :class="settingsStore.isDark ? 'text-slate-400' : 'text-gray-600'"
         >
-          Create an account and access hospitals more easily.
+          Join thousands of patients already using CareBridge.
         </p>
 
         <router-link
           to="/register"
-          class="bg-blue-700 text-white px-8 py-4 rounded-2xl font-bold"
+          class="bg-blue-700 text-white px-10 py-4 rounded-2xl font-bold hover:bg-blue-800 transition"
         >
-          Register Now
+          CREATE ACCOUNT
         </router-link>
 
       </div>

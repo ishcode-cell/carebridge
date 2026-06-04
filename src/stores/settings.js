@@ -1,111 +1,119 @@
 import { defineStore } from 'pinia'
 
-const translations = {
-  English: {
-    home: 'HOME',
-    about: 'ABOUT',
-    services: 'SERVICES',
-    contact: 'CONTACT',
-    login: 'LOGIN',
-    settings: 'Settings',
-    language: 'Language',
-    darkMode: 'Dark Mode',
-    lightMode: 'Light Mode',
-    saveSettings: 'Save Settings',
-    customize: 'Customize your CareBridge experience.',
-    emailNotifications: 'Email Notifications',
-    changePassword: 'Change Password',
-    deleteAccount: 'Delete Account',
-    selectTheme: 'Theme',
-    notifications: 'Notifications',
-    themeLabel: 'Current theme',
-    enableDark: 'Enable dark mode'
-  },
-  French: {
-    home: 'ACCUEIL',
-    about: 'À PROPOS',
-    services: 'SERVICES',
-    contact: 'CONTACT',
-    login: 'CONNEXION',
-    settings: 'Paramètres',
-    language: 'Langue',
-    darkMode: 'Mode Sombre',
-    lightMode: 'Mode Clair',
-    saveSettings: 'Enregistrer',
-    customize: 'Personnalisez votre expérience CareBridge.',
-    emailNotifications: 'Notifications par e-mail',
-    changePassword: 'Changer le mot de passe',
-    deleteAccount: 'Supprimer le compte',
-    selectTheme: 'Thème',
-    notifications: 'Notifications',
-    themeLabel: 'Thème actuel',
-    enableDark: 'Activer le mode sombre'
-  },
-  Kinyarwanda: {
-    home: 'URUGO',
-    about: 'IBYEREKEYE',
-    services: 'SERIVISI',
-    contact: 'HITAMO',
-    login: 'WINJIRA',
-    settings: 'Imyirondoro',
-    language: 'Ururimi',
-    darkMode: 'Imikorere yijimye',
-    lightMode: 'Imikorere yoroheje',
-    saveSettings: 'Bika Impinduka',
-    customize: 'Hindura uburyo bwa CareBridge wishakiye.',
-    emailNotifications: 'Ubutumwa bw’ikoranabuhanga',
-    changePassword: 'Hindura ijambo ry’ibanga',
-    deleteAccount: 'Siba Konti',
-    selectTheme: 'Insanganyamatsiko',
-    notifications: 'Ibimenyeshamakuru',
-    themeLabel: 'Insanganyamatsiko iriho',
-    enableDark: 'Koresha uburyo bwijimye'
-  }
-}
-
 export const useSettingsStore = defineStore('settings', {
   state: () => ({
+    // Theme
     theme: localStorage.getItem('theme') || 'Light',
+
+    // Language
     language: localStorage.getItem('language') || 'English',
-    notifications: localStorage.getItem('notifications') === 'true',
-    languages: ['English', 'French', 'Kinyarwanda'],
-    translations
+
+    languages: [
+      'English',
+      'French',
+      'Kinyarwanda'
+    ],
+
+    // Notifications
+    notifications: JSON.parse(
+      localStorage.getItem('notifications') || 'true'
+    ),
+
+    // New Settings
+    appointmentReminders: JSON.parse(
+      localStorage.getItem('appointmentReminders') || 'true'
+    ),
+
+    smsAlerts: JSON.parse(
+      localStorage.getItem('smsAlerts') || 'true'
+    ),
+
+    publicProfile: JSON.parse(
+      localStorage.getItem('publicProfile') || 'false'
+    ),
+
+    shareLocation: JSON.parse(
+      localStorage.getItem('shareLocation') || 'true'
+    ),
+
+    medicalRecommendations: JSON.parse(
+      localStorage.getItem('medicalRecommendations') || 'true'
+    ),
+
+    twoFactorAuth: JSON.parse(
+      localStorage.getItem('twoFactorAuth') || 'false'
+    )
   }),
 
   getters: {
-    labels: state => state.translations[state.language] || state.translations.English,
-    isDark: state => state.theme === 'Dark'
+    isDark: (state) => state.theme === 'Dark'
   },
 
   actions: {
     setTheme(theme) {
       this.theme = theme
       localStorage.setItem('theme', theme)
-      this.applyTheme()
-    },
-
-    toggleTheme() {
-      this.setTheme(this.isDark ? 'Light' : 'Dark')
     },
 
     setLanguage(language) {
-      if (!this.languages.includes(language)) {
-        language = 'English'
-      }
       this.language = language
       localStorage.setItem('language', language)
     },
 
     setNotifications(value) {
       this.notifications = value
-      localStorage.setItem('notifications', value ? 'true' : 'false')
+      localStorage.setItem(
+        'notifications',
+        JSON.stringify(value)
+      )
     },
 
-    applyTheme() {
-      if (typeof document === 'undefined') return
-      const root = document.documentElement
-      root.classList.toggle('theme-dark', this.isDark)
-      root.classList.toggle('theme-light', !this.isDark)
+    setAppointmentReminders(value) {
+      this.appointmentReminders = value
+      localStorage.setItem(
+        'appointmentReminders',
+        JSON.stringify(value)
+      )
+    },
+
+    setSmsAlerts(value) {
+      this.smsAlerts = value
+      localStorage.setItem(
+        'smsAlerts',
+        JSON.stringify(value)
+      )
+    },
+
+    setPublicProfile(value) {
+      this.publicProfile = value
+      localStorage.setItem(
+        'publicProfile',
+        JSON.stringify(value)
+      )
+    },
+
+    setShareLocation(value) {
+      this.shareLocation = value
+      localStorage.setItem(
+        'shareLocation',
+        JSON.stringify(value)
+      )
+    },
+
+    setMedicalRecommendations(value) {
+      this.medicalRecommendations = value
+      localStorage.setItem(
+        'medicalRecommendations',
+        JSON.stringify(value)
+      )
+    },
+
+    setTwoFactorAuth(value) {
+      this.twoFactorAuth = value
+      localStorage.setItem(
+        'twoFactorAuth',
+        JSON.stringify(value)
+      )
     }
   }
 })
