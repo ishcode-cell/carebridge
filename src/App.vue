@@ -1,11 +1,12 @@
-<script setup>
+]<script setup>
 import { onMounted } from 'vue'
 import { useSettingsStore } from '@/stores/settings'
 
 const settingsStore = useSettingsStore()
 
 onMounted(() => {
-  settingsStore.applyTheme()
+  // safe call (won't crash app)
+  settingsStore?.applyTheme?.()
 })
 </script>
 
@@ -13,7 +14,7 @@ onMounted(() => {
   <div
     :class="[
       'min-h-screen transition-colors duration-500',
-      settingsStore.isDark
+      settingsStore?.isDark
         ? 'bg-slate-950 text-slate-100'
         : 'bg-slate-50 text-slate-950'
     ]"
@@ -21,5 +22,3 @@ onMounted(() => {
     <router-view />
   </div>
 </template>
-
-
